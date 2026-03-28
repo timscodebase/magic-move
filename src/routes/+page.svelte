@@ -56,4 +56,4 @@
 		background: linear-gradient(to right, #007bff, #28a745);
 		margin: 40px 0;
 	}
-</div>
+</style>

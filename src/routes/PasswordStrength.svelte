@@ -1,11 +1,11 @@
 <script lang="ts">
 	let password = $state('');
-	let strenthPercent = $state(0);
+	let strengthPercent = $state(0);
 	let strenthDescription = $derived.by(() => {
-		if (strenthPercent < 20) return 'Weak: Are you sure?';
-		if (strenthPercent < 40) return 'Better: But still weak';
-		if (strenthPercent < 60) return 'Medium: Could be stronger';
-		if (strenthPercent < 80) return 'Strong: Strong, but crackable';
+		if (strengthPercent < 20) return 'Weak: Are you sure?';
+		if (strengthPercent < 40) return 'Better: But still weak';
+		if (strengthPercent < 60) return 'Medium: Could be stronger';
+		if (strengthPercent < 80) return 'Strong: Strong, but crackable';
 		return 'Bingo: Very strong password!';
 	});
 
@@ -32,11 +32,11 @@
 		id="password"
 		type="password"
 		bind:value={password}
-		oninput={() => (strenthPercent = calculateStrength(password))}
+		oninput={() => (strengthPercent = calculateStrength(password))}
 	/>
 	<button onclick={togglePasswordVisibility}>Show Password</button>
 	<div class="strength-bar">
-		<div class="strength-fill" style:width={`${strenthPercent}%`}></div>
+		<div class="strength-fill" style:width={`${strengthPercent}%`}></div>
 	</div>
 	<p>Password Strength: {strenthDescription}</p>
 </div>
