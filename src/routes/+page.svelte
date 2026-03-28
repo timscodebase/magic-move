@@ -1,14 +1,15 @@
 <script lang="ts">
-	import TempConverter from './TempConverter.svelte';
+	import Avatar from './Avatar.svelte';
 	import PasswordStrength from './PasswordStrength.svelte';
 	import RandomQuote from './RandomQuote.svelte';
+	import TempConverter from './TempConverter.svelte';
 </script>
 
 <div class="container">
 	<h1>Fun Tools</h1>
 
 	<div class="tool-section">
-		<TempConverter />
+		<Avatar />
 	</div>
 
 	<hr />
@@ -21,6 +22,12 @@
 
 	<div class="tool-section">
 		<RandomQuote />
+	</div>
+
+	<hr />
+
+	<div class="tool-section">
+		<TempConverter />
 	</div>
 </div>
 
