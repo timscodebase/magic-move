@@ -1,7 +1,7 @@
 <script lang="ts">
-	import TempConverter from "./TempConverter.svelte";
-	import PasswordStrenth from "./PasswordStrenth.svelte";
-	import RandomQuote from "./RandomQuote.svelte";
+	import TempConverter from './TempConverter.svelte';
+	import PasswordStrenth from './PasswordStrenth.svelte';
+	import RandomQuote from './RandomQuote.svelte';
 </script>
 
 <TempConverter />
@@ -17,4 +17,3 @@
 <br />
 
 <RandomQuote />
-

@@ -1,24 +1,42 @@
 <script lang="ts">
-    /// curl -X GET "https://api.api-ninjas.com/v2/quotes?categories=success,wisdom" \
-  ///-H "X-Api-Key: 5mLdxVrMdFYGTOZeypgvG3E1kPQ9x10pWFaWAyJy"
+	import { onMount } from 'svelte';
 
-  import { NINJA_QUOTES_API } from '$env/static/public'
+	type Quote = { quote: string; author: string };
 
-    import { onMount } from "svelte";
+	let quote = $state<Quote>({ quote: '', author: '' });
+	let loading = $state(true);
+	let error = $state('');
 
-    let quote = $state({ quote: "", author: "" });
+	async function loadQuote(): Promise<void> {
+		loading = true;
+		error = '';
 
-    onMount(async () => {
-        const response = await fetch("https://api.api-ninjas.com/v2/quotes?categories=success,wisdom", {
-            headers: {
-                "X-Api-Key": NINJA_QUOTES_API
-            }        });
-        const data = await response.json();
-        quote = data[0];
-    });
+		try {
+			const response = await fetch('/api/random-quote', { cache: 'no-store' });
+			if (!response.ok) throw new Error(`Failed to fetch quote (${response.status})`);
+
+			const data = await response.json();
+			quote = { quote: data.quote ?? '', author: data.author ?? 'Unknown' };
+		} catch (err) {
+			error = err instanceof Error ? err.message : 'Unknown error';
+			quote = { quote: '', author: '' };
+		} finally {
+			loading = false;
+		}
+	}
+
+	onMount(loadQuote);
 </script>
 
 <div>
-    <p>"{quote.quote}"</p>
-    <p>- {quote.author}</p>
+	{#if loading}
+		<p>Loading quote...</p>
+	{:else if error}
+		<p class="error">{error}</p>
+	{:else}
+		<p>"{quote.quote}"</p>
+		<p>- {quote.author}</p>
+	{/if}
+
+	<button onclick={loadQuote}>New quote</button>
 </div>
